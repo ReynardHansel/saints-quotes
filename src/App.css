@@ -61,3 +61,7 @@
 .svg-quote {
   width: 2ch;
 }
+
+.transition {
+  transition: 700ms ease-in-out;
+}
