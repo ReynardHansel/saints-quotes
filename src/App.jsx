@@ -17,21 +17,35 @@ const randomColor = () => {
 }
 
 function App() {
-  // const [count, setCount] = useState(0)
   const [quote, setQuote] = useState(() => quotesData[randomIndex].quote)
   const [author, setAuthor] = useState(() => quotesData[randomIndex].author)
   const [color, setColor] = useState(randomColor)
 
   const fetchQuote = () => {
-    const randomIndex = Math.floor(Math.random() * quotesData.length)
-    setQuote(quotesData[randomIndex].quote)
-    setAuthor(quotesData[randomIndex].author)
+    const p = document.querySelector('.card-text')
+    const h1 = document.querySelector('.card-title')
+
+    // set opacity to 0 after button click
+    p.style.opacity = 0
+    h1.style.opacity = 0
+
+    //color is fetched first (color changes first) before text
     setColor(randomColor)
+
+    // wait until opacity becomes 0 (for 600ms), fetch the data while the opacity = 0, make opacity = 1 again after the data is fetched (= the quote has changed now)
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * quotesData.length)
+      setQuote(quotesData[randomIndex].quote)
+      setAuthor(quotesData[randomIndex].author)
+
+      p.style.opacity = 1
+      h1.style.opacity = 1
+    }, 600);
   }
 
   return (
     <>
-      <div className='container d-flex justify-content-center align-items-center container-size transition' style={{ backgroundColor: color }}>
+      <div className='d-flex justify-content-center align-items-center container-size transition' style={{ backgroundColor: color }}>
         <div className='card border clamp-card'>
           <div className='card-body'>
             <h1 className='card-title text-center quote-size transition' style={{ color: color }}>
