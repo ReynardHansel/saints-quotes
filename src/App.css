@@ -64,3 +64,8 @@
 .transition {
   transition: 600ms ease-in-out;
 }
+
+.svg-link {
+  width: 3ch;
+  color: white;
+}
